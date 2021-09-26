@@ -11,6 +11,7 @@ namespace ShopBridge
         {
             filters.Add(new HandleErrorAttribute());
             //filters.Add(new CustomExceptionFilter());
+
             //GlobalConfiguration.Configuration.Filters.Add(new CustomExceptionFilter());
         }
     }
