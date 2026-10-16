@@ -57,7 +57,7 @@ try {
     & $localDbExe start $instanceName | Out-Host
     if ($LASTEXITCODE -ne 0) { throw 'Starting LocalDB instance failed.' }
 
-    $connection = New-Object System.Data.SqlClient.SqlConnection(
+    $connection = [System.Data.SqlClient.SqlConnection]::new(
         "Data Source=(localdb)\$instanceName;Initial Catalog=master;Integrated Security=True;Connection Timeout=60;"
     )
     $connection.Open()
