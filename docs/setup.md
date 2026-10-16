@@ -1,6 +1,6 @@
 # Local installation and setup
 
-This guide documents the **existing ASP.NET Framework application**, not an ASP.NET Core application. The steps have been inferred from the checked-in source; they have **not** been exercised against a Windows/SQL Server environment.
+This guide documents the **existing ASP.NET Framework application**, not an ASP.NET Core application. The manual Visual Studio/IIS Express setup steps are inferred from source. The GitHub Actions workflow independently builds the solution and tests the SQL bootstrap with disposable SQL Server LocalDB; check the PR's latest CI run for results. IIS Express + HTTP endpoint testing remains manual.
 
 ## 1. Prerequisites
 
