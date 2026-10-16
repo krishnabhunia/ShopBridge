@@ -24,6 +24,6 @@ The controller's **active** connection uses Windows integrated authentication ag
 
 ## Supported claims and open questions
 
-Verified from repository source: .NET Framework 4.8; Web API 2; IIS Express settings; SQL Server ADO.NET; table/procedure names; controller routes and response codes. **Not verified by execution:** dependency restore, SQL bootstrap behavior on a given server version, tests, IIS Express launch, endpoint responses, deployment. These require the review checklist in [testing](testing.md).
+Verified from repository source: .NET Framework 4.8; Web API 2; IIS Express settings; SQL Server ADO.NET; table/procedure names; controller routes and response codes. **Automated CI verification:** a Windows GitHub Actions workflow restores dependencies, builds the solution, runs the existing MSTest suite and checks SQL bootstrap plus stored procedures against disposable LocalDB; see the latest PR checks for pass/fail status. **Still not verified by automated tests:** IIS Express launch, product HTTP endpoint responses, real deployment. These require the review checklist in [testing](testing.md).
 
 No invented performance charts, geographic maps, hosting architecture, or cloud services are included: the repository does not contain data to support them.
