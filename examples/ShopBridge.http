@@ -1,0 +1,46 @@
+# Example HTTP requests for Visual Studio / JetBrains HTTP client / compatible REST clients.
+# Update the port to match the URL shown by IIS Express.
+# Run these only against a disposable local database.
+@baseUrl = http://localhost:26536
+
+### List products
+GET {{baseUrl}}/api/Shop
+Accept: application/json
+
+### Create product (implementation uses PUT, not POST)
+PUT {{baseUrl}}/api/Shop
+Content-Type: application/json
+Accept: application/json
+
+{
+  "ProductName": "Desk lamp",
+  "ProductDescription": "Warm white LED",
+  "ProductPrice": 499.00
+}
+
+### Update product — replace Product_ID with a real existing ID
+PATCH {{baseUrl}}/api/Shop
+Content-Type: application/json
+Accept: application/json
+
+{
+  "Product_ID": 1,
+  "ProductName": "Desk lamp",
+  "ProductDescription": "Updated LED model",
+  "ProductPrice": 549.00
+}
+
+### Invalid name should produce HTTP 400
+PUT {{baseUrl}}/api/Shop
+Content-Type: application/json
+Accept: application/json
+
+{
+  "ProductName": "No",
+  "ProductDescription": "Invalid short product name",
+  "ProductPrice": 10
+}
+
+### Delete product — replace 1 with a disposable local product ID
+DELETE {{baseUrl}}/api/Shop?productID=1
+Accept: application/json
