@@ -41,3 +41,7 @@ jobs:
           if (-not $vstest) { throw 'VSTest console was not found on the runner.' }
           & $vstest 'ShopBridge.Tests/bin/Release/ShopBridge.Tests.dll' /Logger:trx
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Test SQL bootstrap and product stored procedures on LocalDB
+        shell: powershell
+        run: .\ci\test-sql-localdb.ps1
