@@ -1,0 +1,43 @@
+name: ShopBridge build and tests
+
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master, docs/shopbridge-project-guide-pilot]
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    name: Build .NET Framework 4.8 and run MSTest
+    runs-on: windows-2022
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up NuGet
+        uses: NuGet/setup-nuget@v2
+
+      - name: Set up MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Restore NuGet dependencies
+        run: nuget restore ShopBridge.sln -NonInteractive
+
+      - name: Build solution
+        shell: pwsh
+        run: |
+          msbuild ShopBridge.sln -restore /m /p:Configuration=Release '/p:Platform=Any CPU' /p:RestoreIgnoreFailedSources=false
+
+      - name: Run existing MSTest suite
+        shell: pwsh
+        run: |
+          $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio/Installer/vswhere.exe'
+          $vstest = & $vswhere -latest -products '*' -find 'Common7/IDE/Extensions/TestPlatform/vstest.console.exe' | Select-Object -First 1
+          if (-not $vstest) { throw 'VSTest console was not found on the runner.' }
+          & $vstest 'ShopBridge.Tests/bin/Release/ShopBridge.Tests.dll' /Logger:trx
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
