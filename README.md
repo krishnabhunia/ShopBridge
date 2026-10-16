@@ -83,6 +83,6 @@ The port `26536` is the historical IIS Express port shown in the project file; y
 
 ## Verification and scope
 
-This documentation was prepared from the checked-in C# controllers, project files, NuGet manifests, tests and SQL. **It does not claim that the code was built or run**. The existing MSTest project covers the generated `HomeController` and `ValuesController`, not the database-backed ShopController. See [testing](docs/testing.md) for an executable review checklist.
+This documentation was prepared from the checked-in C# controllers, project files, NuGet manifests, tests and SQL. The added [GitHub Actions workflow](.github/workflows/build-and-test.yml) builds the solution on Windows, runs existing MSTest tests, and tests the SQL bootstrap and stored procedures on a disposable LocalDB instance. **Check the PR's latest CI run for the actual result.** Full IIS Express + HTTP integration testing remains a manual step. Existing MSTest tests cover generated controllers, not the ShopController. See [testing](docs/testing.md) for the checklist.
 
 This PR is **documentation and local setup examples only**. It does not change the application’s runtime behavior or rewrite the legacy original SQL script.
