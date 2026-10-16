@@ -6,7 +6,8 @@
 
 IF DB_ID(N'db_ShopBridge') IS NULL
 BEGIN
-    CREATE DATABASE [db_ShopBridge];
+    -- CREATE DATABASE must be the only statement in its execution batch.
+    EXEC (N'CREATE DATABASE [db_ShopBridge]');
 END;
 GO
 
